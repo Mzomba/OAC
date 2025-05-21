@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="p-2 home" style="background: linear-gradient(rgba(8, 7, 8, 0.5), rgba(31, 26, 26, 0.5)), url('{% static "images/hero3.jpg" %}'); background-size:cover;  background-position: center; height: 100vh; overflow: hidden; background-repeat: no-repeat;"> 
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-md-12 text-center welcome" style="width:35rem;">
+      <h1 class="text-white">Welcome to the Old Apostolic Church</h1>
+      <p class="text-white ">Njengamathulusi kaNkulunkulu okulunga, ngokholo lwethu olungazamazami kuJesu Kristu nasebudlelwaneni bukamoya ongcwele, lezozinto zokwenyama sizishaya indiva ngobukhulu bokumazi uJesu Kristu inkhosi nomsindisi wethu.</p>
+      <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Sign up as admin</a>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Login Form -->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Admin log-in form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      
+      <!-- Display the login form -->
+        <form method="POST" action="{% url 'members:login' %}">
+          {% csrf_token %}
+          <div class="form-group">
+         <div class="form-group">
+          <label for="{{ form.username.id_for_label }}">Username:</label>
+          {{form.username}}
+          <label for="{{ form.password.id_for_label }}">Password:</label>
+          {{form.password}}
+        </div>
+
+    <!-- Display error messages -->
+    {% if form.username.errors %}
+      <div class="alert alert-danger mt-2">
+        {{ form.username.errors }}
+      </div>
+    {% endif %}
+    {% if form.password.errors %}
+      <div class="alert alert-danger mt-2">
+        {{ form.password.errors }}
+      </div>
+    {% endif %}    
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger mt-2">
+        {{ form.non_field_errors }}
+      </div>
+    {% endif %}
+    {% if form.username.errors %}
+      <div class="alert alert-danger mt-2">
+        {{ form.username.errors }}
+      </div>
+    {% endif %}
+    {% if form.password.errors %}
+      <div class="alert alert-danger mt-2">
+        {{ form.password.errors }}
+      </div>
+    {% endif %}
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

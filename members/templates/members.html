@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="text-center mt-4">OAC Members List</h1>
+    <div class=" border m-2">
+    <div class="d-flex justify-content-center align-items-center p-3 controls">
+      <button type="button" class="btn btn-primary btn-sm add-member-btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">+ Add member</button>
+      <div class="filter-sort ms-auto">
+        <button class="btn btn-light">Sort By <svg fill="#333" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490 490" xml:space="preserve" stroke="#333"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <polygon points="85.877,154.014 85.877,428.309 131.706,428.309 131.706,154.014 180.497,221.213 217.584,194.27 108.792,44.46 0,194.27 37.087,221.213 "></polygon> <polygon points="404.13,335.988 404.13,61.691 358.301,61.691 358.301,335.99 309.503,268.787 272.416,295.73 381.216,445.54 490,295.715 452.913,268.802 "></polygon> </g> </g></svg></button>
+        <button class="btn btn-light" style="margin-right: 5px;">Filter <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#333"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 4.6C3 4.03995 3 3.75992 3.10899 3.54601C3.20487 3.35785 3.35785 3.20487 3.54601 3.10899C3.75992 3 4.03995 3 4.6 3H19.4C19.9601 3 20.2401 3 20.454 3.10899C20.6422 3.20487 20.7951 3.35785 20.891 3.54601C21 3.75992 21 4.03995 21 4.6V6.33726C21 6.58185 21 6.70414 20.9724 6.81923C20.9479 6.92127 20.9075 7.01881 20.8526 7.10828C20.7908 7.2092 20.7043 7.29568 20.5314 7.46863L14.4686 13.5314C14.2957 13.7043 14.2092 13.7908 14.1474 13.8917C14.0925 13.9812 14.0521 14.0787 14.0276 14.1808C14 14.2959 14 14.4182 14 14.6627V17L10 21V14.6627C10 14.4182 10 14.2959 9.97237 14.1808C9.94787 14.0787 9.90747 13.9812 9.85264 13.8917C9.7908 13.7908 9.70432 13.7043 9.53137 13.5314L3.46863 7.46863C3.29568 7.29568 3.2092 7.2092 3.14736 7.10828C3.09253 7.01881 3.05213 6.92127 3.02763 6.81923C3 6.70414 3 6.58185 3 6.33726V4.6Z" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg></button>
+      </div>
+      <form class="d-flex input-bar">
+        <input class="form-control me-2 input-space w-100" type="search" placeholder="Search" aria-label="Search" style="width: 10rem;">
+        <button class="btn btn-outline-primary search-btn" type="submit">Search</button>
+      </form>
+    </div> 
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for member in members %}
+            <tr>
+                <th scope="row">{{member.id}}</th>
+                <td>{{member.name}}</td>
+                <td>{{member.surname}}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">No members found.</td>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add member form</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{% url 'members:add_member' %}">
+          {% csrf_token %}
+         <div class="form-group">
+          <label for="{{ form.name.id_for_label }}">Name:</label>
+          {{ form.name }}
+          <label for="{{ form.surname.id_for_label }}">Surname:</label>
+          {{ form.surname }}
+          <label for="{{ form.id_number.id_for_label }}">Id Number:</label>
+          {{ form.id_number }}
+          <label for="{{ form.date_of_birth.id_for_label }}">Date of birth:</label>
+          {{ form.date_of_birth }}
+          <label for="{{ form.baptized.id_for_label }}">Date of baptized:</label>
+          {{ form.baptized }}
+        </div>
+        <!-- Display error messages -->
+        {% if form.name.errors %}
+          <div class="alert alert-danger mt-2">
+            {{ form.name.errors }}
+          </div>
+        {% endif %}
+        {% if form.surname.errors %}
+          <div class="alert alert-danger mt-2">
+            {{ form.surname.errors }}
+          </div>
+        {% endif %}
+        {% if form.id_number.errors %}
+          <div class="alert alert-danger mt-2">
+            {{ form.id_number.errors }}
+          </div>
+        {% endif %}
+        {% if form.date_of_birth.errors %}
+          <div class="alert alert-danger mt-2">
+            {{ form.date_of_birth.errors }}
+          </div>
+        {% endif %}
+        {% if form.baptized.errors %}
+          <div class="alert alert-danger mt-2">
+            {{ form.baptized.errors }}
+          </div>
+        {% endif %}
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger mt-2">
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+        {% if form.name.errors %}
+          <div class="alert alert-danger mt-2">
+            {{ form.name.errors }}
+          </div>
+        {% endif %}
+        {% if form.surname.errors %}
+          <div class="alert alert-danger mt-2">
+            {{ form.surname.errors }}
+          </div>
+        {% endif %}
+    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Add member</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
