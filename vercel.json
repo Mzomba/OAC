@@ -9,7 +9,7 @@
             "src": "/(.*)",
             "dest":"OAC/wsgi.py"
         }
-    ]
+    ],
     "env": {
         "DATABASE_URL": "mysql://dubem:Sizolwethu@3307:127.0.0.1/oac"
     }
