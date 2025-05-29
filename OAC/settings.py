@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-c^wu2jj^lbbh)1h%!+bx63@s(fnc%)8(oq9aa-3i8xaa@ew5m^
 DEBUG = False
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
-ALLOWED_HOSTS = [".vercel.app"]
+ALLOWED_HOSTS = ["*"]
  
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
