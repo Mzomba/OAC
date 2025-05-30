@@ -76,7 +76,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'Sizolwethu',
         'HOST':'127.0.0.1',
-        'PORT':'3307',
+        'PORT':'3306',
         'OPTIONS': {
             'charset': 'utf8mb4'
         }
