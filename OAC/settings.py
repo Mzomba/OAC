@@ -1,6 +1,9 @@
 import os
 from pathlib import Path
 
+#from dotenv import load_dotenv
+# Load environment variables from .env file
+#load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -73,10 +76,10 @@ DATABASES = {
         
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'oac',
-        'USER': 'root',
-        'PASSWORD': 'Sizolwethu',
-        'HOST':'127.0.0.1',
-        'PORT':'3306',
+        'USER': 'avnadmin',
+        'PASSWORD': 'AVNS_61DqQgMbv5qQ3l4coWU',
+        'HOST':'oacdb-old-apostolic-church.g.aivencloud.com',
+        'PORT':'28950',
         'OPTIONS': {
             'charset': 'utf8mb4'
         }
