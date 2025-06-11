@@ -15,11 +15,12 @@ class MemberForm(forms.ModelForm):
     # specify the name of model to use
     class Meta:
         model = MembersModel
-        fields = ('name', 'surname', 'id_number', 'date_of_birth', 'baptized')
+        fields = ('name', 'surname', 'id_number', 'date_of_birth', 'baptized', 'category')
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Name', 'class': 'form-control'}),
             'surname': forms.TextInput(attrs={'placeholder': 'Surname', 'class': 'form-control'}),
             'id_number': forms.NumberInput(attrs={'placeholder': 'ID Number', 'class': 'form-control'}),
             'date_of_birth': forms.DateInput(attrs={'placeholder': 'Date of Birth', 'class': 'form-control'}),
             'baptized': forms.DateInput(attrs={'placeholder': 'Baptized', 'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
         }
